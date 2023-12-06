@@ -10,4 +10,18 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="photos">Photos</string>
+    <string name="map">Map</string>
+    <string name="username">Username</string>
+    <string name="log_in">LOG IN</string>
+    <string name="password">password</string>
+    <string name="name">Login</string>
+    <string name="password_example">*******</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="tab_1">Login</string>
+    <string name="tab_2">Register</string>
+    <string name="date_example">06.12.2023 23:00</string>
+    <string name="hello_string">Привет</string>
+    <string name="example_date_comment">06.12.2023 23:00PM</string>
+    <string name="comment">Комментарий</string>
 </resources>
