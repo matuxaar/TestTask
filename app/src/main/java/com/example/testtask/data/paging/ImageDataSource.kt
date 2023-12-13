@@ -23,7 +23,6 @@ class ImagePagingSource(
         } catch (e: Exception) {
             LoadResult.Error(e)
         }
-
     }
 
     override fun getRefreshKey(state: PagingState<Int, ImageOut>): Int? {

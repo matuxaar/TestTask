@@ -26,6 +26,7 @@ import com.example.testtask.R
 import com.example.testtask.databinding.PreviewCameraBinding
 import com.example.testtask.di.viewmodel.ViewModelFactory
 import com.example.testtask.domain.model.ImageIn
+import com.google.android.gms.location.CurrentLocationRequest
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat

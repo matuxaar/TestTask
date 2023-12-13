@@ -51,10 +51,6 @@ class MapFragment: Fragment(), OnMapReadyCallback {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        val intent = Intent(requireContext(), PreviewCameraActivity::class.java)
-        intent.putExtra("latitude", currentLatitude)
-        intent.putExtra("longitude", currentLongitude)
-
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
@@ -82,6 +78,9 @@ class MapFragment: Fragment(), OnMapReadyCallback {
         if (currentLatitude == 0.0 && currentLongitude == 0.0) {
             requestLocationUpdates()
         }
+        val intent = Intent(requireContext(), PreviewCameraActivity::class.java)
+        intent.putExtra("latitude", currentLatitude)
+        intent.putExtra("longitude", currentLongitude)
     }
 
     private fun requestLocationUpdates() {

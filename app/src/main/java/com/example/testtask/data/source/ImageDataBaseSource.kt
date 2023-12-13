@@ -12,10 +12,10 @@ class ImageDataBaseSource @Inject constructor(
 
     suspend fun getImageById(id: Int): ImageEntity = imageDao.getImageById(id)
 
-    suspend fun addPhoto(imageEntity: ImageEntity) = imageDao.addPhoto(imageEntity)
-
     fun getPagedPhotos(): List<ImageEntity> = imageDao.getPagedPhotos()
 
     suspend fun deleteImageFromDb(imageEntity: ImageEntity) = imageDao.deleteImageFromDb(imageEntity)
+
+    suspend fun addPhotos(imageEntityList: List<ImageEntity>) = imageDao.addPhotos(imageEntityList)
 
 }

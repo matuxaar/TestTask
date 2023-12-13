@@ -12,7 +12,7 @@ class ImageToEntityMapper @Inject constructor() {
         return ImageEntity(
             id = id,
             url = url,
-            date = date.toLong(),
+            date = date,
             lat = lat,
             lng = lng
         )

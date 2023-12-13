@@ -15,14 +15,9 @@ class ImageEntityMapper @Inject constructor(){
         return ImageOut(
             id = id,
             url = url,
-            date = mapTimestampToDate(date),
+            date = date,
             lat = lat,
             lng = lng
         )
-    }
-
-    private fun mapTimestampToDate(timestamp: Long): String {
-        val date = Date(timestamp)
-        return SimpleDateFormat("dd.MM.yyyy", Locale.getDefault()).format(date)
     }
 }

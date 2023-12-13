@@ -78,7 +78,7 @@ class RegisterFragment: Fragment() {
 
     private fun isLoginRight(): Boolean {
         if (!binding.editTextLogin.text.matches(REGEX_LOGIN.toRegex())) {
-            binding.editTextLogin.error = "ERROR"
+            binding.editTextLogin.error = "Email pattern is: test_test@test.test"
             return false
         }
         return true

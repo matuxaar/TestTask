@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import com.example.testtask.data.source.ImageLoaderFactory
 import com.example.testtask.domain.model.ImageOut
 import com.example.testtask.domain.repositories.ImageRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,13 +21,9 @@ class ImageListViewModel @Inject constructor(
     private val imageLoaderFactory: ImageLoaderFactory
 ) : ViewModel() {
 
-    private var _imageSharedFlow =
-        MutableSharedFlow<ImageOut>()
-    val imageSharedFlow: SharedFlow<ImageOut> get() = _imageSharedFlow
 
     private val _imageFlow: MutableSharedFlow<PagingData<ImageOut>> = MutableSharedFlow()
     val imageFlow: SharedFlow<PagingData<ImageOut>> get() = _imageFlow
-
 
     private val _deleteImageLiveData = MutableLiveData<Boolean>()
     val deleteImageLiveData: LiveData<Boolean> get() = _deleteImageLiveData
@@ -35,24 +31,22 @@ class ImageListViewModel @Inject constructor(
     private val _imagesFromDb = MutableLiveData<List<ImageOut>>()
     val imageFromDb: LiveData<List<ImageOut>> get() = _imagesFromDb
 
-    private val exceptionHandler = CoroutineExceptionHandler{_, e ->
+    private val exceptionHandler = CoroutineExceptionHandler { _, e ->
         e.printStackTrace()
     }
 
     init {
-        viewModelScope.launch {
+        update()
+    }
+
+    fun update() {
+        viewModelScope.launch(exceptionHandler + Dispatchers.IO) {
             imageLoaderFactory.getImages().collect {
                 _imageFlow.emit(it)
             }
         }
     }
 
-    fun addPhoto(imageOut: ImageOut) {
-        viewModelScope.launch(exceptionHandler) {
-            _imageSharedFlow.emit(imageOut)
-            imageRepository.addPhoto(imageOut)
-        }
-    }
 
     fun deleteImage(imageId: Int, imageOut: ImageOut) {
         viewModelScope.launch {

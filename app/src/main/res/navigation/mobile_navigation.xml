@@ -14,12 +14,9 @@
     <fragment
         android:id="@+id/commentsFragment"
         android:name="com.example.testtask.ui.comments.CommentsFragment" >
-        <action
-            android:id="@+id/action_commentsFragment_to_nav_photos"
-            app:destination="@id/nav_photos" />
         <argument
-            android:name="id"
-            app:argType="integer" />
+            android:name="url"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/nav_photos"
@@ -27,7 +24,8 @@
         tools:layout="@layout/fragment_list_photo" >
         <action
             android:id="@+id/action_nav_photos_to_commentsFragment"
-            app:destination="@id/commentsFragment" />
+            app:destination="@id/commentsFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/nav_map"

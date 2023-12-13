@@ -12,6 +12,7 @@ import com.example.testtask.domain.model.ImageOut
 import com.example.testtask.domain.repositories.ImageRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 class ImageRepositoryImpl @Inject constructor(
@@ -36,9 +37,15 @@ class ImageRepositoryImpl @Inject constructor(
 
         if (response.isSuccessful) {
             val imageResponse = response.body()
-            return imageMapper(imageResponse?.data.orEmpty())
+            val images = imageMapper(imageResponse?.data.orEmpty())
+
+//            if (images.isNotEmpty()) {
+//                imageDataBaseSource.addPhotos(images.map { imageToEntityMapper(it) })
+//            }
+
+            return images
         } else {
-            return emptyList()
+            return imageDataBaseSource.getImagesFromDataBase().map { imageEntityMapper(it) }
         }
     }
 
@@ -57,10 +64,6 @@ class ImageRepositoryImpl @Inject constructor(
 
     override suspend fun getImageById(id: Int): ImageOut = withContext(Dispatchers.IO) {
         imageEntityMapper(imageDataBaseSource.getImageById(id))
-    }
-
-    override suspend fun addPhoto(imageOut: ImageOut) = withContext(Dispatchers.IO) {
-        imageDataBaseSource.addPhoto(imageToEntityMapper(imageOut))
     }
 
     override fun getPagedPhotos(): List<ImageOut> {

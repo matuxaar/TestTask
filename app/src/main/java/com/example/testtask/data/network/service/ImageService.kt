@@ -23,7 +23,7 @@ interface ImageService {
         @Body imageRequest: ImageRequest
     ): Response<ImageUploadResponse>
 
-    @DELETE("image")
+    @DELETE("image/{imageId}")
     suspend fun deleteImage(
         @Path("imageId") imageId: Int
     ): Response<ImageUploadResponse>

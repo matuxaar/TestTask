@@ -17,6 +17,7 @@ class ImageLoaderFactory @Inject constructor(
             pageSize = PAGE_SIZE,
             enablePlaceholders = false
         ),
-            pagingSourceFactory = { ImagePagingSource(imageRepository) }
+            pagingSourceFactory = { ImagePagingSource(imageRepository) },
+            initialKey = 0
         ).flow
 }

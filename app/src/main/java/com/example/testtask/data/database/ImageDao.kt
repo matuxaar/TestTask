@@ -15,8 +15,8 @@ interface ImageDao {
     @Query("SELECT * FROM image_table WHERE id = :id")
     suspend fun getImageById(id: Int): ImageEntity
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addPhoto(imageEntity: ImageEntity)
+    @Insert
+    suspend fun addPhotos(imageEntityList: List<ImageEntity>)
 
     @Query("SELECT * FROM image_table ORDER BY id")
     fun getPagedPhotos(): List<ImageEntity>
