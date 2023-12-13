@@ -3,23 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
-
+    app:startDestination="@id/checkAuthFragment">
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.testtask.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
-
+        android:id="@+id/enterFragment"
+        android:name="com.example.testtask.ui.enter.EnterFragment" >
+        <action
+            android:id="@+id/action_enterFragment_to_nav_photos"
+            app:destination="@id/nav_photos" />
+    </fragment>
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.testtask.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
-
+        android:id="@+id/commentsFragment"
+        android:name="com.example.testtask.ui.comments.CommentsFragment" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.testtask.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_photos"
+        android:name="com.example.testtask.ui.photos.ImageListFragment"
+        tools:layout="@layout/fragment_list_photo" >
+        <action
+            android:id="@+id/action_nav_photos_to_commentsFragment"
+            app:destination="@id/commentsFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="com.example.testtask.ui.map.MapFragment" />
+    <fragment
+        android:id="@+id/checkAuthFragment"
+        android:name="com.example.testtask.ui.checkauth.CheckAuthFragment"
+        android:label="CheckAuthFragment" >
+        <action
+            android:id="@+id/action_checkAuthFragment_to_enterFragment"
+            app:destination="@id/enterFragment"
+            app:popUpTo="@id/checkAuthFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_checkAuthFragment_to_nav_photos"
+            app:destination="@id/nav_photos"
+            app:popUpTo="@id/checkAuthFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>
